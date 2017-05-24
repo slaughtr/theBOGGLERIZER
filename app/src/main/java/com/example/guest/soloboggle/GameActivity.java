@@ -1,6 +1,8 @@
 package com.example.guest.soloboggle;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,12 +16,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.ViewGroup;
-
-import java.text.Format;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -31,6 +29,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     List<String> mPlayerLetters = BoggleDapter.getPlayerLetters();
     List<String> mPlayerWord = new ArrayList<>();
     List<String> mCompletedWords = new ArrayList<>();
+    ArrayList<String> mCompleteArray = new ArrayList<>();
     private TextView mEnteredLetters;
     private ListView mCompletedWordList;
 
@@ -68,6 +67,23 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         mWordClear.setOnClickListener(this);
         mWordSubmit.setOnClickListener(this);
 
+        new CountDownTimer(90000, 1) {
+
+            public void onTick(long millisUntilFinished) {
+                long minutes = millisUntilFinished / 60000;
+                long seconds = (millisUntilFinished % 60000) / 1000;
+                long millis = (millisUntilFinished % 60000) % 1000;
+                setTitle(String.format("Time left: %d:%d.%d", minutes, seconds,
+                        millis));
+            }
+
+            public void onFinish() {
+                mCompleteArray.addAll(mCompletedWords);
+                Intent intent = new Intent(GameActivity.this, resultsActivity.class);
+                intent.putStringArrayListExtra("mCompletedWords", mCompleteArray);
+            }
+        }.start();
+
     }
 
     @Override
@@ -101,13 +117,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                         return view;
                     }
                 };
-
-
-
-
                 mCompletedWordList.setAdapter(adapter);
-
-
 
             }
         }
