@@ -17,7 +17,7 @@ public class BoggleDapter extends BaseAdapter {
     private Context mContext;
     private String[] mConsonants;
     private String[] mVowels;
-    private List<String> mPlayerLetters = new ArrayList<String>();
+    private static List<String> mPlayerLetters = new ArrayList<>();
 
     public BoggleDapter (Context context, String[] consonants, String[] vowels) {
         this.mContext = context;
@@ -55,7 +55,7 @@ public class BoggleDapter extends BaseAdapter {
         }
     }
 
-    public static List<String> getPlayerLetters() {
+    static List<String> getPlayerLetters() {
         return mPlayerLetters;
     }
 
