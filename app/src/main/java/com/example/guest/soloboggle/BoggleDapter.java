@@ -1,6 +1,7 @@
 package com.example.guest.soloboggle;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class BoggleDapter extends BaseAdapter {
     @Override
     public int getCount() {
         getRandomPlayerLetters();
-        return 8;
+        return 12;
     }
 
     @Override
@@ -41,17 +42,21 @@ public class BoggleDapter extends BaseAdapter {
     }
 
     public void getRandomPlayerLetters() {
-        while (mPlayerLetters.size() < 6) {
+        while (mPlayerLetters.size() < 9) {
             Random ran = new Random();
             int consonantRand = ran.nextInt(21);
             mPlayerLetters.add(mConsonants[consonantRand]);
         }
 
-        while (mPlayerLetters.size() < 9) {
+        while (mPlayerLetters.size() < 13) {
             Random ran = new Random();
             int vowelRand = ran.nextInt(6);
             mPlayerLetters.add(mVowels[vowelRand]);
         }
+    }
+
+    public static List<String> getPlayerLetters() {
+        return mPlayerLetters;
     }
 
     @Override
