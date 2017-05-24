@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -40,6 +41,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         mEnteredLetters = (TextView) findViewById(R.id.enteredLetters);
         mCompletedWordList = (ListView) findViewById(R.id.completedWordList);
 
+
         ButterKnife.bind(this);
 
         gridView = (GridView) findViewById(R.id.lettersGrid);
@@ -62,6 +64,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         });
         mWordClear.setOnClickListener(this);
         mWordSubmit.setOnClickListener(this);
+
     }
 
     @Override
@@ -81,6 +84,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d("mCompletedWords", mCompletedWords.toString());
                 mEnteredLetters.setText("");
                 mPlayerWord.clear();
+
+                ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mCompletedWords);
+                mCompletedWordList.setAdapter(adapter);
+
 
             }
         }
