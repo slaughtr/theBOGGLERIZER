@@ -1,5 +1,6 @@
 package com.example.guest.soloboggle;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,9 +13,11 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.ViewGroup;
 
 import java.text.Format;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
@@ -43,9 +46,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
 
         ButterKnife.bind(this);
-
         gridView = (GridView) findViewById(R.id.lettersGrid);
         gridView.setAdapter(new BoggleDapter(this, consonants, vowels));
+
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -85,8 +88,25 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 mEnteredLetters.setText("");
                 mPlayerWord.clear();
 
-                ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mCompletedWords);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout
+                        .simple_list_item_2, android.R.id.text1, mCompletedWords) {
+                    @Override
+                    public View getView(int position, View convertView, ViewGroup parent) {
+
+                        View view = super.getView(position, convertView, parent);
+                        TextView ListItemShow = (TextView) view.findViewById(android.R.id.text1);
+
+                        ListItemShow.setTextColor(Color.parseColor("#03A9F4"));
+
+                        return view;
+                    }
+                };
+
+
+
+
                 mCompletedWordList.setAdapter(adapter);
+
 
 
             }

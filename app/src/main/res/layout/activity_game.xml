@@ -3,11 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.guest.soloboggle.GameActivity">
+    tools:context="com.example.guest.soloboggle.GameActivity"
+    android:background="@color/colorBackground"
+    >
 
     <GridView
         android:layout_width="match_parent"
-        android:layout_height="200sp"
+        android:layout_height="150sp"
         android:columnWidth="100sp"
         android:numColumns="auto_fit"
         android:stretchMode="spacingWidthUniform"
@@ -16,6 +18,7 @@
         android:gravity="left"
         android:scrollingCache="false"
         android:layout_alignParentTop="true"
+        android:textColor="@color/colorAccent"
         />
     <ListView
         android:id="@+id/completedWordList"
@@ -23,19 +26,25 @@
         android:layout_height="210sp"
         android:layout_below="@+id/lettersGrid"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/enteredLetters"
+        android:textColor="@color/colorAccent"
+        >
+
     </ListView>
 
     <TextView
         android:id="@+id/enteredLetters"
         android:layout_width="match_parent"
         android:layout_height="40sp"
-        android:layout_below="@+id/completedWordList"
         android:gravity="center_horizontal"
         android:text="your word here"
         android:textSize="20sp"
         android:textAllCaps="true"
-        />
+        android:layout_above="@+id/wordSubmit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/colorAccent"/>
     <Button
         android:id="@+id/wordSubmit"
         android:layout_width="193sp"
